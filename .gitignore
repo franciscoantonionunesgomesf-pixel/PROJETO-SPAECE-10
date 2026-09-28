@@ -1,0 +1,29 @@
+# Dependências
+node_modules/
+.pnpm-store/
+
+# Build
+dist/
+build/
+
+# Variáveis de ambiente (nunca suba segredos)
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+.manus-logs/
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Cache
+.cache/
+.vite/
+coverage/
