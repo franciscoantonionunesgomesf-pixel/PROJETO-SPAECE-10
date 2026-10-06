@@ -10,7 +10,6 @@ import {
   MonitorPlay,
   Search,
   Sparkles,
-  Target,
   X,
 } from "lucide-react";
 import { atividadesDrive } from "@/data/atividadesDrive";
@@ -31,7 +30,6 @@ function countItems(content: string): number {
 
 const descriptors = Array.from(new Set(atividadesDrive.map((a) => a.descriptor)));
 const totalQuestions = atividadesDrive.reduce((sum, a) => sum + countItems(a.content), 0);
-const totalDiagramas = descriptors.filter((d) => diagramaPorDescritor[d]).length;
 
 function BrandMark() {
   return (
@@ -83,56 +81,33 @@ function Sidebar({
             <span className="nav-symbol">
               <Library size={16} />
             </span>
-            <span className="nav-label">Todos os descritores</span>
-            <span className="nav-count">{atividadesDrive.length}</span>
+            <span className="nav-label">Todas as atividades</span>
           </button>
-          {descriptors.map((d) => {
-            const count = atividadesDrive.filter((a) => a.descriptor === d).length;
-            const hasDiagram = Boolean(diagramaPorDescritor[d]);
-            return (
-              <button
-                key={d}
-                className={`nav-item ${active === d ? "nav-item-active" : ""}`}
-                onClick={() => {
-                  setActive(d);
-                  onClose();
-                }}
-              >
-                <span className="nav-symbol nav-symbol-desc">{d}</span>
-                <span className="nav-label">Descritor {d}</span>
-                {hasDiagram && (
-                  <span className="nav-diag-dot" title="Diagrama disponível" aria-label="Diagrama disponível">
-                    <LayoutGrid size={12} />
-                  </span>
-                )}
-                <span className="nav-count">{count}</span>
-              </button>
-            );
-          })}
+          {descriptors.map((d) => (
+            <button
+              key={d}
+              className={`nav-item ${active === d ? "nav-item-active" : ""}`}
+              title={diagramaPorDescritor[d]?.title ?? `Descritor ${d}`}
+              onClick={() => {
+                setActive(d);
+                onClose();
+              }}
+            >
+              <span className="nav-symbol nav-symbol-desc">{d}</span>
+              <span className="nav-label nav-label-desc">
+                {diagramaPorDescritor[d]?.title ?? `Descritor ${d}`}
+              </span>
+            </button>
+          ))}
         </nav>
 
-        <div className="sidebar-section-label" style={{ marginTop: 18 }}>
-          Materiais
-        </div>
-        <nav className="sidebar-nav" aria-label="Materiais">
-          <a className="nav-item" href="./diagramas/">
-            <span className="nav-symbol nav-symbol-diag">
-              <LayoutGrid size={16} />
-            </span>
-            <span className="nav-label">Galeria de diagramas</span>
-            <span className="nav-count">21</span>
-          </a>
-        </nav>
-
-        <div className="sidebar-footer">
-          <div className="mini-note">
-            <Target size={16} />
-            <div>
-              <strong>{totalQuestions} questões</strong>
-              <span>em {atividadesDrive.length} atividades</span>
-            </div>
-          </div>
-        </div>
+        <a className="sidebar-gallery" href="./diagramas/">
+          <span className="nav-symbol nav-symbol-diag">
+            <LayoutGrid size={16} />
+          </span>
+          <span className="nav-label">Galeria de diagramas</span>
+          <ArrowRight size={15} />
+        </a>
       </aside>
     </>
   );
@@ -162,7 +137,7 @@ function Topbar({
         <input
           value={search}
           onChange={(event) => setSearch(event.target.value)}
-          placeholder="Buscar por título ou descritor..."
+          placeholder="Buscar atividade..."
         />
         {search && (
           <button className="search-clear" onClick={() => setSearch("")} aria-label="Limpar busca">
@@ -174,43 +149,31 @@ function Topbar({
   );
 }
 
-/** Painel que reune, para o descritor escolhido, o diagrama da habilidade + a(s) atividade(s). */
-function DescriptorPanel({ descriptor, activityCount }: { descriptor: string; activityCount: number }) {
+/** Diagrama da habilidade do descritor escolhido — unico ponto de acesso aos diagramas. */
+function DescriptorPanel({ descriptor }: { descriptor: string }) {
   const diag = diagramaPorDescritor[descriptor];
   if (!diag) return null;
   return (
     <section className="desc-panel" aria-label={`Diagrama da habilidade ${descriptor}`}>
-      <a
+      <img
         className="dp-thumb"
-        href={diag.href}
-        target="_blank"
-        rel="noreferrer"
-        title="Abrir o diagrama em tela cheia"
-      >
-        <img src={diag.png} alt={`Diagrama ${diag.num}: ${diag.title}`} loading="lazy" />
-        <span className="dp-thumb-badge">
-          <MonitorPlay size={13} /> Tela cheia
-        </span>
-      </a>
+        src={diag.png}
+        alt={`Diagrama ${diag.num}: ${diag.title}`}
+        loading="lazy"
+      />
       <div className="dp-copy">
         <span className="dp-kicker">
-          <LayoutGrid size={13} /> DIAGRAMA DA HABILIDADE · {diag.num}
+          <LayoutGrid size={13} /> DIAGRAMA DA HABILIDADE
         </span>
         <h2>{diag.title}</h2>
-        <p>
-          Projete o diagrama na TV interativa para explicar o conteúdo da habilidade e, em seguida, aplique a
-          atividade abaixo com a turma.
-        </p>
+        <p>Projete na TV interativa para explicar a habilidade e, em seguida, aplique a atividade abaixo.</p>
         <div className="dp-actions">
           <a className="btn-solid btn-lg" href={diag.href} target="_blank" rel="noreferrer">
-            <MonitorPlay size={16} /> Abrir diagrama
+            <MonitorPlay size={16} /> Abrir em tela cheia
           </a>
-          <a className="btn-ghost btn-lg" href={diag.png} download={`${diag.code}-${descriptor}.png`}>
+          <a className="btn-ghost btn-lg" href={diag.png} download={`${diag.code}.png`}>
             <Download size={16} /> Baixar PNG
           </a>
-          <span className="dp-count">
-            {activityCount} {activityCount === 1 ? "atividade" : "atividades"} disponível(is)
-          </span>
         </div>
       </div>
     </section>
@@ -219,12 +182,13 @@ function DescriptorPanel({ descriptor, activityCount }: { descriptor: string; ac
 
 function MaterialCard({ item, onView }: { item: Atividade; onView: (item: Atividade) => void }) {
   const questions = countItems(item.content);
-  const diag = diagramaPorDescritor[item.descriptor];
   return (
     <article className="card">
       <div className="card-top">
         <span className="card-desc">{item.descriptor}</span>
-        <span className={`card-level level-${item.difficulty}`}>{difficultyLabel[item.difficulty] ?? item.difficulty}</span>
+        <span className={`card-level level-${item.difficulty}`}>
+          {difficultyLabel[item.difficulty] ?? item.difficulty}
+        </span>
       </div>
       <h3 className="card-title">{item.title}</h3>
       <p className="card-text">{item.description}</p>
@@ -236,17 +200,6 @@ function MaterialCard({ item, onView }: { item: Atividade; onView: (item: Ativid
           <button className="btn-ghost" onClick={() => onView(item)}>
             Ver <ArrowRight size={14} />
           </button>
-          {diag && (
-            <a
-              className="btn-diag"
-              href={diag.href}
-              target="_blank"
-              rel="noreferrer"
-              title="Ver o diagrama desta habilidade"
-            >
-              <LayoutGrid size={14} /> Diagrama
-            </a>
-          )}
           <button className="btn-solid" onClick={() => downloadActivityPdf(item)}>
             <Download size={14} /> PDF
           </button>
@@ -264,7 +217,7 @@ function ViewModal({ item, onClose }: { item: Atividade; onClose: () => void }) 
       <div className="modal-card" role="dialog" aria-modal="true" onClick={(event) => event.stopPropagation()}>
         <div className="modal-header">
           <div>
-            <div className="modal-kicker">ATIVIDADE · {item.descriptor}</div>
+            <div className="modal-kicker">{item.descriptor} · {difficultyLabel[item.difficulty] ?? item.difficulty}</div>
             <h2>{item.title}</h2>
             <p>{item.description}</p>
           </div>
@@ -272,39 +225,15 @@ function ViewModal({ item, onClose }: { item: Atividade; onClose: () => void }) 
             <X size={18} />
           </button>
         </div>
-        <div className="view-meta">
-          <span className="pill pill-desc">{item.descriptor}</span>
-          <span className="pill">{difficultyLabel[item.difficulty] ?? item.difficulty}</span>
-          <span className="pill">{questions} questões</span>
-          <span className="pill pill-mint">Gabarito incluso</span>
-        </div>
-
-        {diag && (
-          <a className="modal-diagram" href={diag.href} target="_blank" rel="noreferrer">
-            <span className="md-thumb">
-              <img src={diag.png} alt={`Diagrama ${diag.num}`} loading="lazy" />
-            </span>
-            <span className="md-copy">
-              <span className="md-kicker">
-                <LayoutGrid size={12} /> DIAGRAMA DA HABILIDADE
-              </span>
-              <strong>{diag.title}</strong>
-              <span className="md-hint">Clique para abrir em tela cheia e projetar na TV</span>
-            </span>
-            <span className="md-cta">
-              <MonitorPlay size={16} />
-            </span>
-          </a>
-        )}
 
         <div className="view-content">
-          <div className="view-content-label">ITENS · QUESTÕES · GABARITO</div>
+          <div className="view-content-label">ITENS · QUESTÕES · GABARITO · {questions} QUESTÕES</div>
           <p>{item.content}</p>
         </div>
         <div className="view-actions">
           {diag && (
-            <a className="btn-diag btn-lg" href={diag.png} download={`${diag.code}-${item.descriptor}.png`}>
-              <Download size={16} /> PNG do diagrama
+            <a className="btn-ghost" href={diag.href} target="_blank" rel="noreferrer">
+              <LayoutGrid size={15} /> Ver diagrama
             </a>
           )}
           <button className="btn-ghost" onClick={onClose}>
@@ -338,12 +267,6 @@ export default function Home() {
   }, [active, search]);
 
   const activeDiagram = active !== "todos" ? diagramaPorDescritor[active] : undefined;
-  const activeCount = atividadesDrive.filter((a) => a.descriptor === active).length;
-
-  const clearFilters = () => {
-    setSearch("");
-    setActive("todos");
-  };
 
   return (
     <div className="app-shell">
@@ -359,11 +282,11 @@ export default function Home() {
               <h1>
                 Atividades e diagramas,
                 <br />
-                <em>organizados por descritor.</em>
+                <em>por descritor.</em>
               </h1>
               <p>
-                Escolha o descritor e tenha, na mesma tela, a atividade pronta e o diagrama da habilidade para
-                projetar na TV interativa.
+                Escolha um descritor na barra lateral e veja, na mesma tela, o diagrama da habilidade e a
+                atividade pronta para a turma.
               </p>
             </div>
             <div className="hero-stats">
@@ -382,39 +305,14 @@ export default function Home() {
             </div>
           </section>
 
-          <a className="feature-banner" href="./diagramas/">
-            <span className="fb-icon">
-              <LayoutGrid size={22} />
-            </span>
-            <span className="fb-copy">
-              <strong>Galeria de diagramas das habilidades</strong>
-              <span>
-                21 telas prontas para projetar na TV interativa — {totalDiagramas} delas já vinculadas às
-                atividades deste acervo.
-              </span>
-            </span>
-            <span className="fb-cta">
-              Abrir galeria <ArrowRight size={16} />
-            </span>
-          </a>
+          {activeDiagram && <DescriptorPanel descriptor={active} />}
 
-          <section className="toolbar">
-            <div className="chips">
-              <button className={`chip ${active === "todos" ? "chip-active" : ""}`} onClick={() => setActive("todos")}>
-                Todos
-              </button>
-              {descriptors.map((d) => (
-                <button key={d} className={`chip ${active === d ? "chip-active" : ""}`} onClick={() => setActive(d)}>
-                  {d}
-                </button>
-              ))}
-            </div>
+          <div className="section-head">
+            <h2>{active === "todos" ? "Todas as atividades" : `Atividades · ${active}`}</h2>
             <span className="result-count">
               {filtered.length} {filtered.length === 1 ? "atividade" : "atividades"}
             </span>
-          </section>
-
-          {activeDiagram && <DescriptorPanel descriptor={active} activityCount={activeCount} />}
+          </div>
 
           {filtered.length ? (
             <div className="grid">
@@ -427,7 +325,13 @@ export default function Home() {
               <Search size={26} />
               <strong>Nenhuma atividade encontrada</strong>
               <span>Tente outro termo ou selecione outro descritor.</span>
-              <button className="btn-ghost" onClick={clearFilters}>
+              <button
+                className="btn-ghost"
+                onClick={() => {
+                  setSearch("");
+                  setActive("todos");
+                }}
+              >
                 Limpar filtros
               </button>
             </div>
