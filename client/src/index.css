@@ -67,6 +67,8 @@ input { font: inherit; }
 .nav-symbol { width: 30px; height: 30px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 9px; background: rgba(255,255,255,.08); color: #9fb2d1; font: 700 11px 'Space Grotesk', sans-serif; }
 .nav-item-active .nav-symbol { background: var(--coral); color: #fff; }
 .nav-symbol-desc { background: rgba(74,169,144,.18); color: #7fd6bd; }
+.nav-symbol-diag { background: rgba(255,214,109,.18); color: #ffd66d; }
+a.nav-item { text-decoration: none; }
 .nav-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .nav-count { font-size: 10px; font-weight: 700; color: #7f93b5; background: rgba(255,255,255,.07); border-radius: 6px; padding: 2px 7px; }
 .nav-item-active .nav-count { background: rgba(255,255,255,.16); color: #fff; }
@@ -108,6 +110,15 @@ input { font: inherit; }
 .hero-stat { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 16px; padding: 16px 20px; text-align: center; min-width: 96px; backdrop-filter: blur(4px); }
 .hero-stat strong { display: block; color: #fff; font: 600 30px 'Space Grotesk', sans-serif; letter-spacing: -1px; }
 .hero-stat span { font-size: 10.5px; color: #a9bcd8; font-weight: 600; letter-spacing: .4px; }
+
+/* FEATURE BANNER (Diagramas) */
+.feature-banner { display: flex; align-items: center; gap: 16px; margin-bottom: 22px; padding: 16px 20px; border-radius: 18px; background: linear-gradient(100deg, #fff4e0 0%, #ffe9d6 100%); border: 1px solid #ffe0c2; box-shadow: var(--shadow-sm); text-decoration: none; transition: transform .16s ease, box-shadow .16s ease; }
+.feature-banner:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.fb-icon { width: 46px; height: 46px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 13px; background: var(--coral); color: #fff; box-shadow: 0 8px 18px rgba(255,125,103,.35); }
+.fb-copy { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.fb-copy strong { color: var(--navy); font: 600 15.5px 'Space Grotesk', sans-serif; letter-spacing: -.3px; }
+.fb-copy span { color: #8a7a63; font-size: 12px; line-height: 1.4; }
+.fb-cta { display: inline-flex; align-items: center; gap: 7px; flex: 0 0 auto; background: var(--navy); color: #fff; border-radius: 11px; padding: 10px 16px; font-size: 12px; font-weight: 700; }
 
 /* TOOLBAR */
 .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }

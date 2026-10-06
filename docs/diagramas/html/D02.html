@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>D02 - Estabelecer rela&ccedil;&otilde;es entre partes do texto (coes&atilde;o: retomadas e substitui&ccedil;&otilde;es)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root{
+    --indigo:#3730a3; --indigo-dark:#1e1b4b; --violet:#6d28d9;
+    --amber:#f59e0b; --amber-dark:#b45309; --emerald:#059669;
+    --emerald-light:#d1fae5; --rose:#e11d48; --slate:#1e293b;
+    --slate-soft:#475569; --bg:#eef1f8; --card:#ffffff;
+  }
+  html,body{ width:1920px; height:1080px; overflow:hidden; }
+  body{ font-family:'Inter','Segoe UI',Roboto,Arial,sans-serif; background:var(--bg); color:var(--slate); position:relative; }
+  .slide{ width:1920px; height:1080px; padding:34px 46px 30px 46px; display:flex; flex-direction:column; position:relative;
+    background: radial-gradient(1200px 600px at 100% 0%, rgba(109,40,217,.10), transparent 60%),
+                radial-gradient(900px 500px at 0% 100%, rgba(245,158,11,.10), transparent 60%), var(--bg); }
+  .topbar{ display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+  .brand{ display:flex; align-items:center; gap:14px; }
+  .brand .logo{ background:linear-gradient(135deg,var(--indigo),var(--violet)); color:#fff; font-family:'Montserrat'; font-weight:800; font-size:17px; letter-spacing:1px; padding:10px 18px; border-radius:12px; box-shadow:0 6px 16px rgba(55,48,163,.30); }
+  .brand .sub{ font-size:15px; font-weight:600; color:var(--slate-soft); letter-spacing:.3px; }
+  .brand .sub b{ color:var(--indigo); }
+  .etapa{ display:flex; align-items:center; gap:10px; background:#fff; border:2px solid #e2e8f0; border-radius:12px; padding:9px 16px; font-size:15px; font-weight:700; color:var(--indigo-dark); box-shadow:0 3px 10px rgba(15,23,42,.05); }
+  .etapa .dot{ width:10px; height:10px; border-radius:50%; background:var(--amber); }
+  .title{ display:flex; align-items:center; gap:22px; background:linear-gradient(120deg,var(--indigo-dark) 0%, var(--indigo) 55%, var(--violet) 100%); border-radius:20px; padding:20px 30px; margin-bottom:20px; box-shadow:0 12px 30px rgba(30,27,75,.28); position:relative; overflow:hidden; }
+  .title::after{ content:""; position:absolute; right:-60px; top:-60px; width:260px; height:260px; border-radius:50%; background:radial-gradient(circle, rgba(245,158,11,.35), transparent 70%); }
+  .dcode{ flex:0 0 auto; background:linear-gradient(135deg,var(--amber),#fbbf24); color:#3b2500; font-family:'Montserrat'; font-weight:900; font-size:44px; padding:12px 22px; border-radius:16px; line-height:1; box-shadow:0 8px 20px rgba(245,158,11,.45); letter-spacing:-1px; }
+  .ttxt{ position:relative; z-index:2; }
+  .ttxt .lbl{ font-size:14px; font-weight:700; letter-spacing:3px; color:#c7d2fe; text-transform:uppercase; }
+  .ttxt h1{ font-family:'Montserrat'; font-weight:800; font-size:38px; color:#fff; line-height:1.12; margin-top:4px; }
+  .content{ flex:1; display:grid; grid-template-columns: 560px 1fr; gap:20px; min-height:0; }
+  .col{ display:flex; flex-direction:column; gap:20px; min-height:0; }
+  .card{ background:var(--card); border-radius:18px; padding:20px 24px; box-shadow:0 8px 22px rgba(15,23,42,.07); border:1px solid #e8ecf4; display:flex; flex-direction:column; min-height:0; }
+  .card-head{ display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+  .card-head .ic{ width:40px; height:40px; border-radius:11px; flex:0 0 auto; display:flex; align-items:center; justify-content:center; font-size:21px; }
+  .ic.indigo{ background:#e0e7ff; } .ic.amber{ background:#fef3c7; } .ic.emerald{ background:#d1fae5; } .ic.rose{ background:#ffe4e6; } .ic.violet{ background:#ede9fe; }
+  .card-head h2{ font-family:'Montserrat'; font-weight:800; font-size:20px; letter-spacing:.4px; color:var(--indigo-dark); text-transform:uppercase; }
+  .card p{ font-size:17.5px; line-height:1.5; color:var(--slate-soft); }
+  .card p b{ color:var(--indigo); }
+  .hl-amber{ background:linear-gradient(transparent 55%, #fde68a 55%); font-weight:700; color:#7c4a03; padding:0 2px; border-radius:2px; }
+  .hl-emerald{ background:linear-gradient(transparent 55%, #a7f3d0 55%); font-weight:700; color:#065f46; padding:0 2px; border-radius:2px; }
+  .def .big{ font-size:18px; line-height:1.5; color:var(--slate); }
+  .def .big b{ color:var(--indigo); }
+  .chips{ display:flex; flex-wrap:wrap; gap:9px; margin-top:4px; }
+  .chip{ background:#eef2ff; color:var(--indigo); border:1.5px solid #c7d2fe; font-weight:700; font-size:15px; padding:7px 13px; border-radius:999px; }
+  .steps{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .step{ display:flex; gap:13px; align-items:flex-start; background:#f8fafc; border:1.5px solid #e8ecf4; border-radius:14px; padding:13px 15px; }
+  .step .n{ flex:0 0 auto; width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,var(--indigo),var(--violet)); color:#fff; font-family:'Montserrat'; font-weight:800; font-size:17px; display:flex; align-items:center; justify-content:center; }
+  .step .t{ font-size:16px; line-height:1.42; color:var(--slate-soft); }
+  .step .t b{ color:var(--indigo-dark); }
+  .example{ flex:1; }
+  .ex-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:18px; flex:1; min-height:0; }
+  .ex-text{ background:#f8fafc; border:1.5px solid #e2e8f0; border-left:6px solid var(--amber); border-radius:12px; padding:15px 17px; font-size:16.5px; line-height:1.5; color:var(--slate); }
+  .ex-text .tag{ display:inline-block; font-size:12.5px; font-weight:800; letter-spacing:1.5px; color:var(--amber-dark); text-transform:uppercase; margin-bottom:7px; }
+  .ex-q{ margin-top:14px; }
+  .ex-q .q{ font-weight:700; color:var(--indigo-dark); font-size:16.5px; margin-bottom:9px; }
+  .alt{ font-size:15.5px; color:var(--slate-soft); padding:6px 11px; border-radius:9px; margin-bottom:6px; border:1.5px solid transparent; }
+  .alt.correct{ background:var(--emerald-light); border-color:#6ee7b7; color:#065f46; font-weight:700; }
+  .alt.correct::before{ content:"\2713  "; font-weight:900; color:var(--emerald); }
+  .alt::before{ content:"\25CB  "; color:#94a3b8; }
+  .ex-ans{ background:#ecfdf5; border:1.5px solid #a7f3d0; border-radius:12px; padding:12px 15px; font-size:15.5px; line-height:1.45; color:#065f46; }
+  .ex-ans b{ color:#047857; }
+  .sala{ margin-top:14px; background:#eef2ff; border:1.5px solid #c7d2fe; border-radius:12px; padding:12px 15px; font-size:15px; color:var(--indigo); line-height:1.45; }
+  .attn ul{ list-style:none; }
+  .attn li{ font-size:15.5px; line-height:1.4; color:var(--slate-soft); padding:8px 0 8px 26px; position:relative; border-bottom:1px dashed #eef1f8; }
+  .attn li:last-child{ border-bottom:none; }
+  .attn li::before{ content:"!"; position:absolute; left:0; top:8px; width:18px; height:18px; border-radius:50%; background:var(--rose); color:#fff; font-weight:900; font-size:12px; display:flex; align-items:center; justify-content:center; }
+  .attn li b{ color:var(--indigo-dark); }
+  .footer{ margin-top:16px; display:flex; align-items:center; justify-content:space-between; font-size:13.5px; color:#94a3b8; font-weight:500; }
+  .footer .prog{ display:flex; align-items:center; gap:8px; }
+  .footer .bar{ width:180px; height:8px; background:#e2e8f0; border-radius:99px; overflow:hidden; }
+  .footer .bar i{ display:block; height:100%; width:10%; background:linear-gradient(90deg,var(--amber),var(--violet)); }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">SPAECE 2025</div>
+      <div class="sub">Boletim da Escola &nbsp;&bull;&nbsp; <b>L&iacute;ngua Portuguesa</b> &nbsp;&bull;&nbsp; Equipe Pedag&oacute;gica</div>
+    </div>
+    <div class="etapa"><span class="dot"></span> 9&ordm; ano do Ensino Fundamental</div>
+  </div>
+  <div class="title">
+    <div class="dcode">D02</div>
+    <div class="ttxt">
+      <div class="lbl">Habilidade da Matriz de Refer&ecirc;ncia</div>
+      <h1>Estabelecer rela&ccedil;&otilde;es entre partes do texto (coes&atilde;o: retomadas e substitui&ccedil;&otilde;es)</h1>
+    </div>
+  </div>
+  <div class="content">
+    <div class="col">
+      <div class="card def">
+        <div class="card-head"><div class="ic indigo">&#128161;</div><h2>O que &eacute;?</h2></div>
+        <p class="big">&Eacute; perceber como o texto <b>&ldquo;amarra&rdquo; suas partes</b>: palavras que <b>retomam</b> outras j&aacute; ditas (pronomes, sin&ocirc;nimos, express&otilde;es). Isso d&aacute; <b>continuidade</b> e evita repeti&ccedil;&otilde;es. A pergunta cl&aacute;ssica &eacute;: <span class="hl-amber">a quem ou a que este termo se refere?</span></p>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="ic violet">&#128269;</div><h2>Palavras-chave do enunciado</h2></div>
+        <p style="font-size:16px;">O comando costuma usar estas pistas:</p>
+        <div class="chips"><span class="chip">a palavra X refere-se a</span><span class="chip">o termo destacado retoma</span><span class="chip">refere-se a quem</span><span class="chip">substitui</span><span class="chip">o pronome retoma</span><span class="chip">a que se refere</span></div>
+      </div>
+      <div class="card attn" style="flex:1;">
+        <div class="card-head"><div class="ic rose">&#9888;&#65039;</div><h2>Fique atento!</h2></div>
+        <ul><li>Pronomes (<b>ele, ela, isso, esse</b>) costumam retomar termos <b>j&aacute; ditos</b> (an&aacute;fora).</li><li><b>Sin&ocirc;nimos</b> e express&otilde;es equivalentes tamb&eacute;m retomam (&ldquo;o animal&rdquo; = &ldquo;o lobo&rdquo;).</li><li>&ldquo;<b>Isso/esse</b>&rdquo; pode resumir <b>uma ideia inteira</b>, n&atilde;o s&oacute; uma palavra.</li><li>N&atilde;o confunda <b>retomar</b> (voltar a algo) com <b>introduzir</b> algo novo.</li></ul>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-head"><div class="ic amber">&#129517;</div><h2>Como fazer? Passo a passo</h2></div>
+        <div class="steps"><div class="step"><div class="n">1</div><div class="t">Encontre o <b>termo destacado</b> (pronome, sin&ocirc;nimo ou express&atilde;o).</div></div><div class="step"><div class="n">2</div><div class="t">Procure no texto <b>a palavra que ele substitui</b> (o referente).</div></div><div class="step"><div class="n">3</div><div class="t">Confira a <b>concord&acirc;ncia</b> (g&ecirc;nero e n&uacute;mero) e o sentido.</div></div><div class="step"><div class="n">4</div><div class="t">Confirme: <b>quem/o qu&ecirc;</b> esse termo est&aacute; retomando?</div></div></div>
+      </div>
+      <div class="card example">
+        <div class="card-head"><div class="ic emerald">&#128221;</div><h2>Exemplo comentado</h2></div>
+        <div class="ex-grid">
+          <div>
+            <div class="ex-text"><span class="tag">Texto</span>O lobo vivia sozinho na floresta. <span class="hl-amber">Ele</span> evitava os ca&ccedil;adores, pois <span class="hl-amber">estes</span> queriam captur&aacute;-lo. Um dia, <span class="hl-amber">o animal</span> encontrou uma ovelha perdida.</div>
+            <div class="ex-q">
+              <div class="q">No texto, os termos &ldquo;Ele&rdquo; e &ldquo;o animal&rdquo; referem-se, respectivamente, a:</div>
+              <div class="alt">A) aos ca&ccedil;adores e &agrave; ovelha.</div><div class="alt correct">B) ao lobo e ao lobo.</div><div class="alt">C) &agrave; floresta e aos ca&ccedil;adores.</div><div class="alt">D) &agrave; ovelha e ao lobo.</div>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; justify-content:center;">
+            <div class="ex-ans"><b>Resposta: B.</b> &ldquo;<b>Ele</b>&rdquo; retoma <b>o lobo</b> (concorda com o antecedente); &ldquo;<b>o animal</b>&rdquo; &eacute; um <b>sin&ocirc;nimo</b> que tamb&eacute;m retoma o lobo. J&aacute; &ldquo;<b>estes</b>&rdquo; retoma <b>os ca&ccedil;adores</b>.<br><br>&#128269; <b>Estrat&eacute;gia:</b> pergunte sempre &ldquo;<b>quem?</b>&rdquo; ao encontrar o pronome e confira a concord&acirc;ncia.</div>
+            <div class="sala"><b>&#128172; Para a sala:</b> &ldquo;Todo pronome &eacute; uma seta: descubra para onde ele aponta no texto.&rdquo;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div>Fonte: Boletim SPAECE 2025 &ndash; L&iacute;ngua Portuguesa &middot; Matriz de Refer&ecirc;ncia &middot; 9&ordm; ano (D02)</div>
+    <div class="prog"><span>Descritor 2 de 21</span><span class="bar"><i></i></span></div>
+  </div>
+</div>
+</body>
+</html>

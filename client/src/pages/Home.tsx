@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { ArrowRight, BookOpen, Download, FileText, Library, Menu, Search, Sparkles, Target, X } from "lucide-react";
+import { ArrowRight, BookOpen, Download, FileText, LayoutGrid, Library, Menu, Search, Sparkles, Target, X } from "lucide-react";
 import { atividadesDrive } from "@/data/atividadesDrive";
 import { downloadActivityPdf } from "@/lib/activityPdf";
 
@@ -88,6 +88,19 @@ function Sidebar({
               </button>
             );
           })}
+        </nav>
+
+        <div className="sidebar-section-label" style={{ marginTop: 18 }}>
+          Materiais
+        </div>
+        <nav className="sidebar-nav" aria-label="Materiais">
+          <a className="nav-item" href="./diagramas/">
+            <span className="nav-symbol nav-symbol-diag">
+              <LayoutGrid size={16} />
+            </span>
+            <span className="nav-label">Diagramas das habilidades</span>
+            <span className="nav-count">21</span>
+          </a>
         </nav>
 
         <div className="sidebar-footer">
@@ -264,6 +277,19 @@ export default function Home() {
               </div>
             </div>
           </section>
+
+          <a className="feature-banner" href="./diagramas/">
+            <span className="fb-icon">
+              <LayoutGrid size={22} />
+            </span>
+            <span className="fb-copy">
+              <strong>Diagramas explicativos das habilidades</strong>
+              <span>21 telas prontas para projetar na TV interativa — uma para cada descritor do 9º ano.</span>
+            </span>
+            <span className="fb-cta">
+              Abrir galeria <ArrowRight size={16} />
+            </span>
+          </a>
 
           <section className="toolbar">
             <div className="chips">

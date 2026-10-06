@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#12223e" />
+<meta name="description" content="Diagramas explicativos das habilidades de Língua Portuguesa do 9º ano (SPAECE 2025) para uso em TV interativa." />
+<title>Diagramas das Habilidades · SPAECE Conecta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy:#12223e; --navy-2:#1c3159; --ink:#1f2b3d; --muted:#7f8da2;
+    --paper:#f5f7fb; --line:#e6ebf3; --coral:#ff7d67; --mint:#4aa990; --yellow:#ffd66d;
+    --shadow-md:0 12px 30px rgba(18,34,62,.09); --shadow-lg:0 24px 60px rgba(18,34,62,.22);
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:'DM Sans',sans-serif; background:var(--paper); color:var(--ink); }
+  a { text-decoration:none; }
+  .wrap { max-width:1240px; margin:0 auto; padding:0 22px; }
+
+  header.hero { background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 100%); color:#fff; padding:34px 0 30px; position:relative; overflow:hidden; }
+  header.hero::after { content:""; position:absolute; right:-90px; top:-90px; width:320px; height:320px; border-radius:50%; background:radial-gradient(circle, rgba(255,125,103,.35), transparent 70%); }
+  .brand { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+  .mark { position:relative; width:30px; height:30px; }
+  .mark i { position:absolute; border-radius:50%; width:15px; height:15px; }
+  .mark i:nth-child(1) { background:var(--coral); top:0; left:0; }
+  .mark i:nth-child(2) { background:var(--mint); top:0; right:0; }
+  .mark i:nth-child(3) { background:var(--yellow); bottom:0; left:7px; }
+  .brand-name { font:600 18px 'Space Grotesk',sans-serif; letter-spacing:-.4px; }
+  .brand-name span { color:var(--coral); }
+  .brand-caption { font-size:9.5px; letter-spacing:1.5px; color:#7f93b5; font-weight:700; margin-top:2px; }
+  .hero h1 { font:700 clamp(24px,3.4vw,38px) 'Space Grotesk',sans-serif; margin:0 0 10px; letter-spacing:-.8px; }
+  .hero p { margin:0; max-width:720px; color:#c8d4e8; font-size:15px; line-height:1.55; }
+  .hero-actions { margin-top:20px; display:flex; flex-wrap:wrap; gap:12px; }
+  .hero-actions a { display:inline-flex; align-items:center; gap:8px; font-weight:600; font-size:14px; padding:11px 18px; border-radius:12px; }
+  .hero-actions .primary { background:var(--coral); color:#fff; box-shadow:0 10px 24px rgba(255,125,103,.35); }
+  .hero-actions .secondary { background:rgba(255,255,255,.1); color:#fff; border:1px solid rgba(255,255,255,.18); }
+
+  .toolbar { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin:26px 0 18px; }
+  .search { display:flex; align-items:center; gap:9px; background:#fff; border:1px solid var(--line); border-radius:12px; padding:11px 14px; min-width:280px; box-shadow:var(--shadow-md); }
+  .search input { border:0; outline:0; font:inherit; width:100%; color:var(--ink); }
+  .count { font-size:13px; color:var(--muted); font-weight:600; }
+
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(330px,1fr)); gap:20px; padding-bottom:40px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:18px; overflow:hidden; box-shadow:var(--shadow-md); display:flex; flex-direction:column; transition:transform .16s ease, box-shadow .16s ease; }
+  .card:hover { transform:translateY(-3px); box-shadow:var(--shadow-lg); }
+  .thumb { position:relative; cursor:zoom-in; background:#e9edf5; aspect-ratio:16/9; overflow:hidden; }
+  .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+  .zoom { position:absolute; inset:auto 10px 10px auto; background:rgba(18,34,62,.82); color:#fff; font-size:11.5px; font-weight:600; padding:6px 11px; border-radius:9px; opacity:0; transition:opacity .16s ease; }
+  .thumb:hover .zoom { opacity:1; }
+  .card-body { padding:15px 16px 16px; display:flex; flex-direction:column; gap:10px; flex:1; }
+  .card-top { display:flex; align-items:center; justify-content:space-between; }
+  .badge { background:var(--navy); color:#fff; font:700 12px 'Space Grotesk',sans-serif; padding:4px 10px; border-radius:8px; letter-spacing:.5px; }
+  .idx { font-size:11px; color:var(--muted); font-weight:600; }
+  .card h3 { font:600 15.5px 'Space Grotesk',sans-serif; line-height:1.3; margin:0; color:var(--navy); flex:1; }
+  .card-actions { display:flex; gap:9px; margin-top:2px; }
+  .btn { flex:1; text-align:center; font-size:12.5px; font-weight:600; padding:9px 10px; border-radius:10px; }
+  .btn.ghost { background:#eef2f8; color:var(--navy); }
+  .btn.solid { background:var(--mint); color:#fff; }
+
+  footer { background:var(--navy); color:#9fb0cc; padding:26px 0; font-size:13px; }
+  footer .wrap { display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+  footer b { color:#fff; }
+
+  .lightbox { position:fixed; inset:0; background:rgba(9,16,30,.92); display:none; align-items:center; justify-content:center; z-index:100; padding:26px; }
+  .lightbox.open { display:flex; }
+  .lightbox img { max-width:100%; max-height:88vh; border-radius:12px; box-shadow:var(--shadow-lg); }
+  .lb-close { position:absolute; top:18px; right:22px; background:rgba(255,255,255,.14); color:#fff; border:0; width:44px; height:44px; border-radius:12px; font-size:22px; cursor:pointer; }
+  .lb-nav { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,.14); color:#fff; border:0; width:52px; height:52px; border-radius:14px; font-size:24px; cursor:pointer; }
+  .lb-prev { left:20px; } .lb-next { right:20px; }
+  .empty { text-align:center; color:var(--muted); padding:60px 0; font-weight:600; }
+  @media (max-width:560px) { .btn { font-size:11.5px; } .lb-nav { display:none; } }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark"><i></i><i></i><i></i></div>
+      <div>
+        <div class="brand-name">spaece<span>conecta</span></div>
+        <div class="brand-caption">DIAGRAMAS · 9º ANO · LÍNGUA PORTUGUESA</div>
+      </div>
+    </div>
+    <h1>Diagramas explicativos das habilidades</h1>
+    <p>21 telas prontas para o professor projetar na TV interativa e explicar o conteúdo de cada descritor da Matriz de Referência do SPAECE — Língua Portuguesa, 9º ano. Cada tela traz: o que é, palavras-chave do enunciado, fique atento, passo a passo e exemplo comentado.</p>
+    <div class="hero-actions">
+      <a class="primary" href="SPAECE_2025_9ano_LP_Diagramas_Habilidades.pdf" download>⬇ Baixar PDF completo (21 telas)</a>
+      <a class="secondary" href="../">← Voltar ao acervo</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="toolbar">
+    <label class="search">🔎 <input id="q" type="search" placeholder="Buscar por descritor ou palavra-chave..." /></label>
+    <span class="count" id="count">21 diagramas</span>
+  </div>
+  <section class="grid" id="grid">
+      <article class="card" data-code="D01" data-title="localizar informações explícitas em um texto">
+        <div class="thumb" data-src="png/D01.png">
+          <img loading="lazy" src="png/D01.png" alt="Diagrama D01 - Localizar informações explícitas em um texto" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D01</span><span class="idx">Descritor 1 de 21</span></div>
+          <h3>Localizar informações explícitas em um texto</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D01.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D01.png" download="D01.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-code="D02" data-title="estabelecer relações entre partes do texto (coesão: retomadas e substituições)">
+        <div class="thumb" data-src="png/D02.png">
+          <img loading="lazy" src="png/D02.png" alt="Diagrama D02 - Estabelecer relações entre partes do texto (coesão: retomadas e substituições)" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D02</span><span class="idx">Descritor 2 de 21</span></div>
+          <h3>Estabelecer relações entre partes do texto (coesão: retomadas e substituições)</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D02.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D02.png" download="D02.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-code="D03" data-title="inferir o sentido de uma palavra ou expressão">
+        <div class="thumb" data-src="png/D03.png">
+          <img loading="lazy" src="png/D03.png" alt="Diagrama D03 - Inferir o sentido de uma palavra ou expressão" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D03</span><span class="idx">Descritor 3 de 21</span></div>
+          <h3>Inferir o sentido de uma palavra ou expressão</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D03.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D03.png" download="D03.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-code="D04" data-title="inferir uma informação implícita em um texto">
+        <div class="thumb" data-src="png/D04.png">
+          <img loading="lazy" src="png/D04.png" alt="Diagrama D04 - Inferir uma informação implícita em um texto" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D04</span><span class="idx">Descritor 4 de 21</span></div>
+          <h3>Inferir uma informação implícita em um texto</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D04.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D04.png" download="D04.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-code="D05" data-title="interpretar texto com auxílio de material gráfico diverso (charges, quadrinhos, fotos, gráficos)">
+        <div class="thumb" data-src="png/D05.png">
+          <img loading="lazy" src="png/D05.png" alt="Diagrama D05 - Interpretar texto com auxílio de material gráfico diverso (charges, quadrinhos, fotos, gráficos)" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D05</span><span class="idx">Descritor 5 de 21</span></div>
+          <h3>Interpretar texto com auxílio de material gráfico diverso (charges, quadrinhos, fotos, gráficos)</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D05.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D05.png" download="D05.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-code="D06" data-title="identificar o tema de um texto">
+        <div class="thumb" data-src="png/D06.png">
+          <img loading="lazy" src="png/D06.png" alt="Diagrama D06 - Identificar o tema de um texto" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D06</span><span class="idx">Descritor 6 de 21</span></div>
+          <h3>Identificar o tema de um texto</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D06.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D06.png" download="D06.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-code="D07" data-title="identificar a tese de um texto">
+        <div class="thumb" data-src="png/D07.png">
+          <img loading="lazy" src="png/D07.png" alt="Diagrama D07 - Identificar a tese de um texto" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D07</span><span class="idx">Descritor 7 de 21</span></div>
+          <h3>Identificar a tese de um texto</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D07.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D07.png" download="D07.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-code="D08" data-title="estabelecer relação entre a tese e os argumentos oferecidos para sustentá-la">
+        <div class="thumb" data-src="png/D08.png">
+          <img loading="lazy" src="png/D08.png" alt="Diagrama D08 - Estabelecer relação entre a tese e os argumentos oferecidos para sustentá-la" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D08</span><span class="idx">Descritor 8 de 21</span></div>
+          <h3>Estabelecer relação entre a tese e os argumentos oferecidos para sustentá-la</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D08.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D08.png" download="D08.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-code="D09" data-title="diferenciar as partes principais das secundárias em um texto">
+        <div class="thumb" data-src="png/D09.png">
+          <img loading="lazy" src="png/D09.png" alt="Diagrama D09 - Diferenciar as partes principais das secundárias em um texto" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D09</span><span class="idx">Descritor 9 de 21</span></div>
+          <h3>Diferenciar as partes principais das secundárias em um texto</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D09.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D09.png" download="D09.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-code="D10" data-title="identificar o conflito gerador do enredo e os elementos que constroem a narrativa">
+        <div class="thumb" data-src="png/D10.png">
+          <img loading="lazy" src="png/D10.png" alt="Diagrama D10 - Identificar o conflito gerador do enredo e os elementos que constroem a narrativa" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D10</span><span class="idx">Descritor 10 de 21</span></div>
+          <h3>Identificar o conflito gerador do enredo e os elementos que constroem a narrativa</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D10.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D10.png" download="D10.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-code="D11" data-title="estabelecer relação causa/consequência entre partes e elementos do texto">
+        <div class="thumb" data-src="png/D11.png">
+          <img loading="lazy" src="png/D11.png" alt="Diagrama D11 - Estabelecer relação causa/consequência entre partes e elementos do texto" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D11</span><span class="idx">Descritor 11 de 21</span></div>
+          <h3>Estabelecer relação causa/consequência entre partes e elementos do texto</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D11.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D11.png" download="D11.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-code="D12" data-title="identificar a finalidade de textos de diferentes gêneros">
+        <div class="thumb" data-src="png/D12.png">
+          <img loading="lazy" src="png/D12.png" alt="Diagrama D12 - Identificar a finalidade de textos de diferentes gêneros" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D12</span><span class="idx">Descritor 12 de 21</span></div>
+          <h3>Identificar a finalidade de textos de diferentes gêneros</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D12.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D12.png" download="D12.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-code="D13" data-title="identificar as marcas linguísticas que evidenciam o locutor e o interlocutor de um texto">
+        <div class="thumb" data-src="png/D13.png">
+          <img loading="lazy" src="png/D13.png" alt="Diagrama D13 - Identificar as marcas linguísticas que evidenciam o locutor e o interlocutor de um texto" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D13</span><span class="idx">Descritor 13 de 21</span></div>
+          <h3>Identificar as marcas linguísticas que evidenciam o locutor e o interlocutor de um texto</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D13.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D13.png" download="D13.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-code="D14" data-title="distinguir um fato da opinião relativa a esse fato">
+        <div class="thumb" data-src="png/D14.png">
+          <img loading="lazy" src="png/D14.png" alt="Diagrama D14 - Distinguir um fato da opinião relativa a esse fato" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D14</span><span class="idx">Descritor 14 de 21</span></div>
+          <h3>Distinguir um fato da opinião relativa a esse fato</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D14.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D14.png" download="D14.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-code="D15" data-title="estabelecer relações lógico-discursivas (conjunções, advérbios etc.)">
+        <div class="thumb" data-src="png/D15.png">
+          <img loading="lazy" src="png/D15.png" alt="Diagrama D15 - Estabelecer relações lógico-discursivas (conjunções, advérbios etc.)" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D15</span><span class="idx">Descritor 15 de 21</span></div>
+          <h3>Estabelecer relações lógico-discursivas (conjunções, advérbios etc.)</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D15.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D15.png" download="D15.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-code="D16" data-title="identificar efeitos de ironia ou humor em textos variados">
+        <div class="thumb" data-src="png/D16.png">
+          <img loading="lazy" src="png/D16.png" alt="Diagrama D16 - Identificar efeitos de ironia ou humor em textos variados" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D16</span><span class="idx">Descritor 16 de 21</span></div>
+          <h3>Identificar efeitos de ironia ou humor em textos variados</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D16.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D16.png" download="D16.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-code="D17" data-title="reconhecer o efeito de sentido decorrente do uso da pontuação e de outras notações">
+        <div class="thumb" data-src="png/D17.png">
+          <img loading="lazy" src="png/D17.png" alt="Diagrama D17 - Reconhecer o efeito de sentido decorrente do uso da pontuação e de outras notações" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D17</span><span class="idx">Descritor 17 de 21</span></div>
+          <h3>Reconhecer o efeito de sentido decorrente do uso da pontuação e de outras notações</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D17.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D17.png" download="D17.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-code="D18" data-title="reconhecer o efeito de sentido decorrente da escolha de uma determinada palavra ou expressão">
+        <div class="thumb" data-src="png/D18.png">
+          <img loading="lazy" src="png/D18.png" alt="Diagrama D18 - Reconhecer o efeito de sentido decorrente da escolha de uma determinada palavra ou expressão" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D18</span><span class="idx">Descritor 18 de 21</span></div>
+          <h3>Reconhecer o efeito de sentido decorrente da escolha de uma determinada palavra ou expressão</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D18.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D18.png" download="D18.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-code="D19" data-title="reconhecer o efeito de sentido decorrente da exploração de recursos ortográficos e/ou morfossintáticos">
+        <div class="thumb" data-src="png/D19.png">
+          <img loading="lazy" src="png/D19.png" alt="Diagrama D19 - Reconhecer o efeito de sentido decorrente da exploração de recursos ortográficos e/ou morfossintáticos" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D19</span><span class="idx">Descritor 19 de 21</span></div>
+          <h3>Reconhecer o efeito de sentido decorrente da exploração de recursos ortográficos e/ou morfossintáticos</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D19.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D19.png" download="D19.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-code="D20" data-title="reconhecer diferentes formas de tratar uma informação na comparação de textos sobre o mesmo tema">
+        <div class="thumb" data-src="png/D20.png">
+          <img loading="lazy" src="png/D20.png" alt="Diagrama D20 - Reconhecer diferentes formas de tratar uma informação na comparação de textos sobre o mesmo tema" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D20</span><span class="idx">Descritor 20 de 21</span></div>
+          <h3>Reconhecer diferentes formas de tratar uma informação na comparação de textos sobre o mesmo tema</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D20.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D20.png" download="D20.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+      <article class="card" data-code="D21" data-title="reconhecer posições distintas entre duas ou mais opiniões relativas ao mesmo fato ou tema">
+        <div class="thumb" data-src="png/D21.png">
+          <img loading="lazy" src="png/D21.png" alt="Diagrama D21 - Reconhecer posições distintas entre duas ou mais opiniões relativas ao mesmo fato ou tema" />
+          <span class="zoom">Ampliar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-top"><span class="badge">D21</span><span class="idx">Descritor 21 de 21</span></div>
+          <h3>Reconhecer posições distintas entre duas ou mais opiniões relativas ao mesmo fato ou tema</h3>
+          <div class="card-actions">
+            <a class="btn ghost" href="html/D21.html" target="_blank" rel="noopener">Abrir tela cheia</a>
+            <a class="btn solid" href="png/D21.png" download="D21.png">Baixar PNG</a>
+          </div>
+        </div>
+      </article>
+  </section>
+  <div class="empty" id="empty" style="display:none">Nenhum diagrama encontrado.</div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>Fonte: <b>Boletim SPAECE 2025</b> — Língua Portuguesa — Matriz de Referência — 9º ano</span>
+    <span><b>SPAECE Conecta</b> · Material de apoio pedagógico</span>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose" aria-label="Fechar">×</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Anterior">‹</button>
+  <img id="lbImg" src="" alt="Diagrama ampliado" />
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Próximo">›</button>
+</div>
+
+<script>
+  const grid = document.getElementById('grid');
+  const cards = Array.from(grid.querySelectorAll('.card'));
+  const q = document.getElementById('q');
+  const count = document.getElementById('count');
+  const empty = document.getElementById('empty');
+
+  q.addEventListener('input', () => {
+    const term = q.value.trim().toLowerCase();
+    let visible = 0;
+    cards.forEach(c => {
+      const match = !term || c.dataset.code.toLowerCase().includes(term) || c.dataset.title.includes(term);
+      c.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    count.textContent = visible + (visible === 1 ? ' diagrama' : ' diagramas');
+    empty.style.display = visible ? 'none' : 'block';
+  });
+
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  let current = 0;
+  const visibleCards = () => cards.filter(c => c.style.display !== 'none');
+
+  function openAt(card) {
+    const list = visibleCards();
+    current = list.indexOf(card);
+    lbImg.src = card.querySelector('img').src;
+    lb.classList.add('open');
+  }
+  function step(dir) {
+    const list = visibleCards();
+    if (!list.length) return;
+    current = (current + dir + list.length) % list.length;
+    lbImg.src = list[current].querySelector('img').src;
+  }
+  cards.forEach(c => c.querySelector('.thumb').addEventListener('click', () => openAt(c)));
+  document.getElementById('lbClose').onclick = () => lb.classList.remove('open');
+  document.getElementById('lbPrev').onclick = () => step(-1);
+  document.getElementById('lbNext').onclick = () => step(1);
+  lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') lb.classList.remove('open');
+    if (e.key === 'ArrowLeft') step(-1);
+    if (e.key === 'ArrowRight') step(1);
+  });
+</script>
+</body>
+</html>
