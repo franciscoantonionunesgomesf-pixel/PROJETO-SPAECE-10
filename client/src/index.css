@@ -184,12 +184,44 @@ a.nav-item { text-decoration: none; }
 @keyframes modal-in { from { opacity: 0; transform: translateY(10px) scale(.98); } to { opacity: 1; transform: none; } }
 @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
 
+/* ============ DESCRITOR + DIAGRAMA ============ */
+.nav-diag-dot { display: grid; place-items: center; width: 20px; height: 20px; flex: 0 0 auto; border-radius: 6px; background: rgba(255,214,109,.16); color: #ffd66d; }
+.nav-item-active .nav-diag-dot { background: rgba(255,214,109,.28); }
+
+.btn-diag { display: inline-flex; align-items: center; gap: 6px; background: #fff3d6; color: #a9761f; border-radius: 9px; padding: 8px 12px; font-size: 11.5px; font-weight: 700; transition: background .15s ease, transform .15s ease; }
+.btn-diag:hover { background: #ffe9b8; transform: translateY(-1px); }
+a.btn-diag, a.btn-ghost, a.btn-solid { text-decoration: none; }
+
+.desc-panel { display: flex; gap: 22px; align-items: stretch; margin-bottom: 22px; padding: 20px; border-radius: 20px; background: linear-gradient(100deg, #fff8ec 0%, #fff2e2 100%); border: 1px solid #ffe4c9; box-shadow: var(--shadow-sm); animation: fade-in .2s ease; }
+.dp-thumb { position: relative; flex: 0 0 auto; width: 340px; border-radius: 14px; overflow: hidden; border: 1px solid #f0dcc4; background: #fff; box-shadow: var(--shadow-sm); transition: transform .16s ease, box-shadow .16s ease; }
+.dp-thumb:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.dp-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; aspect-ratio: 16 / 9; }
+.dp-thumb-badge { position: absolute; left: 10px; bottom: 10px; display: inline-flex; align-items: center; gap: 5px; background: rgba(18,34,62,.86); color: #fff; font-size: 10.5px; font-weight: 700; border-radius: 8px; padding: 5px 10px; backdrop-filter: blur(3px); }
+.dp-copy { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.dp-kicker { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; font-size: 10px; font-weight: 800; letter-spacing: 1.1px; color: #c47a2a; background: rgba(255,214,109,.3); border-radius: 8px; padding: 6px 11px; }
+.dp-copy h2 { color: var(--navy); font: 600 21px/1.2 'Space Grotesk', sans-serif; letter-spacing: -.6px; margin: 13px 0 8px; }
+.dp-copy p { color: #8a7a63; font-size: 12.5px; line-height: 1.6; margin: 0; max-width: 560px; }
+.dp-actions { display: flex; align-items: center; gap: 10px; margin-top: auto; padding-top: 16px; flex-wrap: wrap; }
+.dp-count { font-size: 11.5px; font-weight: 700; color: #a9761f; background: rgba(255,214,109,.22); border-radius: 999px; padding: 7px 13px; }
+
+.modal-diagram { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; padding: 12px 14px; border-radius: 14px; background: linear-gradient(100deg, #fff8ec 0%, #fff2e2 100%); border: 1px solid #ffe4c9; text-decoration: none; transition: transform .16s ease, box-shadow .16s ease; }
+.modal-diagram:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.md-thumb { flex: 0 0 auto; width: 116px; border-radius: 9px; overflow: hidden; border: 1px solid #f0dcc4; background: #fff; }
+.md-thumb img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.md-copy { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.md-kicker { display: inline-flex; align-items: center; gap: 5px; font-size: 9px; font-weight: 800; letter-spacing: 1px; color: #c47a2a; }
+.md-copy strong { color: var(--navy); font: 600 13.5px/1.3 'Space Grotesk', sans-serif; letter-spacing: -.2px; }
+.md-hint { color: #a08a6b; font-size: 11px; }
+.md-cta { flex: 0 0 auto; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 11px; background: var(--coral); color: #fff; box-shadow: 0 8px 16px rgba(255,125,103,.32); }
+
 /* ============ RESPONSIVE ============ */
 @media (max-width: 1080px) {
   .grid { grid-template-columns: repeat(2, 1fr); }
   .hero { flex-direction: column; align-items: flex-start; }
   .hero-stats { width: 100%; }
   .hero-stat { flex: 1; }
+  .desc-panel { flex-direction: column; }
+  .dp-thumb { width: 100%; }
 }
 
 @media (max-width: 860px) {
