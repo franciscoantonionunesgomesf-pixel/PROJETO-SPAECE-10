@@ -15,6 +15,7 @@ import {
 import { atividadesDrive } from "@/data/atividadesDrive";
 import { diagramaPorDescritor } from "@/data/diagramas";
 import { downloadActivityPdf } from "@/lib/activityPdf";
+import Projector from "@/components/Projector";
 
 type Atividade = (typeof atividadesDrive)[number];
 
@@ -149,7 +150,7 @@ function Topbar({
   );
 }
 
-/** Diagrama da habilidade do descritor escolhido — unico ponto de acesso aos diagramas. */
+/** Diagrama da habilidade do descritor escolhido — único ponto de acesso aos diagramas. */
 function DescriptorPanel({ descriptor }: { descriptor: string }) {
   const diag = diagramaPorDescritor[descriptor];
   if (!diag) return null;
@@ -180,7 +181,13 @@ function DescriptorPanel({ descriptor }: { descriptor: string }) {
   );
 }
 
-function MaterialCard({ item, onView }: { item: Atividade; onView: (item: Atividade) => void }) {
+function MaterialCard({
+  item,
+  onProject,
+}: {
+  item: Atividade;
+  onProject: (item: Atividade) => void;
+}) {
   const questions = countItems(item.content);
   return (
     <article className="card">
@@ -197,10 +204,14 @@ function MaterialCard({ item, onView }: { item: Atividade; onView: (item: Ativid
           <FileText size={13} /> {questions} questões
         </span>
         <div className="card-actions">
-          <button className="btn-ghost" onClick={() => onView(item)}>
-            Ver <ArrowRight size={14} />
+          <button className="btn-solid" onClick={() => onProject(item)}>
+            <MonitorPlay size={14} /> Usar na TV
           </button>
-          <button className="btn-solid" onClick={() => downloadActivityPdf(item)}>
+          <button
+            className="btn-ghost"
+            onClick={() => downloadActivityPdf(item)}
+            title="Baixar esta atividade em PDF"
+          >
             <Download size={14} /> PDF
           </button>
         </div>
@@ -209,49 +220,10 @@ function MaterialCard({ item, onView }: { item: Atividade; onView: (item: Ativid
   );
 }
 
-function ViewModal({ item, onClose }: { item: Atividade; onClose: () => void }) {
-  const questions = countItems(item.content);
-  const diag = diagramaPorDescritor[item.descriptor];
-  return (
-    <div className="modal-backdrop" role="presentation" onClick={onClose}>
-      <div className="modal-card" role="dialog" aria-modal="true" onClick={(event) => event.stopPropagation()}>
-        <div className="modal-header">
-          <div>
-            <div className="modal-kicker">{item.descriptor} · {difficultyLabel[item.difficulty] ?? item.difficulty}</div>
-            <h2>{item.title}</h2>
-            <p>{item.description}</p>
-          </div>
-          <button className="modal-close" onClick={onClose} aria-label="Fechar">
-            <X size={18} />
-          </button>
-        </div>
-
-        <div className="view-content">
-          <div className="view-content-label">ITENS · QUESTÕES · GABARITO · {questions} QUESTÕES</div>
-          <p>{item.content}</p>
-        </div>
-        <div className="view-actions">
-          {diag && (
-            <a className="btn-ghost" href={diag.href} target="_blank" rel="noreferrer">
-              <LayoutGrid size={15} /> Ver diagrama
-            </a>
-          )}
-          <button className="btn-ghost" onClick={onClose}>
-            Fechar
-          </button>
-          <button className="btn-solid btn-lg" onClick={() => downloadActivityPdf(item)}>
-            <Download size={16} /> Baixar PDF
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function Home() {
   const [active, setActive] = useState<string>("todos");
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [selected, setSelected] = useState<Atividade | null>(null);
+  const [projecting, setProjecting] = useState<Atividade | null>(null);
   const [search, setSearch] = useState("");
 
   const filtered = useMemo(() => {
@@ -285,8 +257,8 @@ export default function Home() {
                 <em>por descritor.</em>
               </h1>
               <p>
-                Escolha um descritor na barra lateral e veja, na mesma tela, o diagrama da habilidade e a
-                atividade pronta para a turma.
+                Escolha um descritor, projete o diagrama da habilidade e conduza as questões na TV interativa —
+                uma por vez, com gabarito na hora. O PDF fica disponível quando precisar.
               </p>
             </div>
             <div className="hero-stats">
@@ -317,7 +289,7 @@ export default function Home() {
           {filtered.length ? (
             <div className="grid">
               {filtered.map((item) => (
-                <MaterialCard key={item.id} item={item} onView={setSelected} />
+                <MaterialCard key={item.id} item={item} onProject={setProjecting} />
               ))}
             </div>
           ) : (
@@ -345,7 +317,15 @@ export default function Home() {
           </footer>
         </main>
       </div>
-      {selected && <ViewModal item={selected} onClose={() => setSelected(null)} />}
+      {projecting && (
+        <Projector
+          title={projecting.title}
+          descriptor={projecting.descriptor}
+          content={projecting.content}
+          onClose={() => setProjecting(null)}
+          onDownload={() => downloadActivityPdf(projecting)}
+        />
+      )}
     </div>
   );
 }
